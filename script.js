@@ -1,122 +1,102 @@
-let step = 0;
-
 const title = document.getElementById("title");
 const text = document.getElementById("text");
 const buttons = document.getElementById("buttons");
-const music = document.getElementById("bg-music");
 
-/* STORY PAGES */
+let currentPage = 0;
+
+/* Pages */
 const pages = [
   {
-    title: "Hey Barleen… ❤️",
-    text: "I made this for you.\nNot because it’s Valentine’s Day…\nBut because you deserve reminders of how loved you are."
+    title: "Barleen… 💗",
+    text: "Hey my love.\nI made this just for you.\nNot because it’s Valentine’s Day…\nBut because you deserve something special."
   },
   {
-    title: "My Barleen…",
-    text: "I know today was supposed to feel special.\nAnd I’m sorry I couldn’t do something bigger."
+    title: "My Barleezy 💖",
+    text: "I know today is supposed to feel big.\nAnd I’m sorry I couldn’t do everything I wanted."
   },
   {
     title: "The truth is…",
-    text: "My funds were low.\nBut my love for you has never been.\nNot for a second."
+    text: "My funds were low.\nBut my love for you has never been.\nNot even for a second."
   },
   {
-    title: "I felt guilty.",
-    text: "Because you do so much.\nYou care so deeply.\nAnd sometimes I don’t even know how I got lucky enough to have you."
+    title: "You’re amazing.",
+    text: "Barleen, you’re kind.\nYou’re caring.\nYou make life feel softer just by being in it."
   },
   {
-    title: "You are rare.",
-    text: "Barleen… you’re kind in a world that isn’t always kind.\nYou love in a way that feels safe.\nYou are genuinely one of a kind."
+    title: "I appreciate you.",
+    text: "You do so much.\nYou love so deeply.\nAnd I never want you to forget how much you mean to me."
   },
   {
-    title: "I want you to know…",
-    text: "Even if I can’t buy the biggest gifts right now,\nI will always find ways to make you feel loved.\nBecause you matter to me more than anything."
+    title: "Inside joke moment 😭",
+    text: "BEEFIN WITH MY CHICK WHEN IM IN JAILLL\n…I HAVE NOTTHHHINGGYG 😭💀\nBut even when I have nothing…\nI still have love for you."
   },
   {
-    title: "You’re my favorite person.",
-    text: "My best friend.\nMy comfort.\nThe girl I think about when I picture the future."
+    title: "Barleen…",
+    text: "You’re my favorite person.\nMy comfort.\nMy best friend.\nThe one I want in my future."
   },
   {
-    title: "And I promise you this…",
-    text: "This isn’t the end of what I want to give you.\nOne day I’m going to spoil you the way you deserve.\nThis is just a chapter, not the whole story."
-  },
-  {
-    title: "Choose a Surprise 💝",
+    title: "Choose what you want 💝",
     text: "Tap one, my love:",
     menu: true
   }
 ];
 
-/* START EXPERIENCE */
-function startExperience() {
-  music.play();
-  nextPage();
-}
-
-/* NEXT PAGE */
-function nextPage() {
-  const page = pages[step];
-
+/* Render Page */
+function renderPage() {
+  const page = pages[currentPage];
   title.innerText = page.title;
   text.innerText = page.text;
 
+  buttons.innerHTML = "";
+
   if (page.menu) {
     buttons.innerHTML = `
-      <button onclick="reasons()">10 Reasons I Love You</button>
-      <button onclick="future()">Our Future Together</button>
-      <button onclick="funny()">Funny Moment 😂</button>
-      <button onclick="secret()">Secret Message 🔒</button>
-      <button onclick="forgive()">Final Question 💗</button>
+      <button onclick="secret()">🔒 Secret Message</button>
+      <button onclick="datePromise()">🌹 Promise Date</button>
+      <button onclick="forgive()">💗 Final Question</button>
     `;
   } else {
-    buttons.innerHTML = `<button onclick="continueStory()">Continue ➜</button>`;
+    buttons.innerHTML = `<button onclick="nextPage()">Next 💌</button>`;
   }
-
-  step++;
 }
 
-/* CONTINUE */
-function continueStory() {
-  if (step < pages.length) nextPage();
+function nextPage() {
+  currentPage++;
+  if (currentPage < pages.length) {
+    renderPage();
+  }
 }
 
-/* MENU OPTIONS */
-function reasons() {
-  title.innerText = "10 Reasons I Love You ❤️";
-  text.innerText =
-    "1. Your heart is pure.\n2. You care so deeply.\n3. You make me feel safe.\n4. Your laugh is my favorite sound.\n5. You’re my peace.\n6. You’re my best friend.\n7. You believe in me.\n8. You’re beautiful beyond words.\n9. Life is better with you.\n10. I love you the most, always Barleen.";
-}
-
-function future() {
-  title.innerText = "Our Future 💍";
-  text.innerText =
-    "Barleen… one day we’ll look back at moments like this.\nNot at what we bought,\nBut at how real our love was.\n\nI want a future full of laughs, late-night talks, and memories.\nI promise I’ll make it up to you soon.";
-}
-
-function funny() {
-  title.innerText = "Our Inside Joke 😂";
-  text.innerText =
-    "BEEFIN WITH MY CHICK WHEN IM IN JAILLL 😭😭\n\nAND I HAVE NOTTHHHINGGYG 💀\n\nNo matter what…\nYou’re my favorite person to laugh with.\nI love you Barleen.";
-}
-
+/* Secret */
 function secret() {
-  title.innerText = "🔒 Only for Barleen…";
+  title.innerText = "Only for Barleen… 🔒";
   text.innerText =
-    "If nobody told you today…\n\nYou are enough.\nYou are loved.\nAnd you are my favorite blessing in this life.\n\nThank you for being you, Barleen.\nI love you the most.";
+    "If nobody told you today…\n\nYou are enough.\nYou are loved.\nAnd you are my favorite blessing.\n\nI love you the most, Barleen 💗";
+
+  buttons.innerHTML = `<button onclick="renderPage()">Back 💞</button>`;
 }
 
-/* FINAL QUESTION */
-function forgive() {
-  title.innerText = "Will you forgive me Barleen? 💗";
+/* Promise Date */
+function datePromise() {
+  title.innerText = "A Promise 🌹";
   text.innerText =
-    "I love you more than anything.\nAnd I promise this isn’t the end.\nThis is just the start.\n\nYou deserve the world…\nAnd I’ll spend my life proving that.";
+    "Barleen…\nThis isn’t the end.\nI promise you a real date soon.\nA day where it’s all about you.\n\nBecause you deserve that.\nAlways.";
+
+  buttons.innerHTML = `<button onclick="renderPage()">Back 💞</button>`;
+}
+
+/* Forgiveness Question */
+function forgive() {
+  title.innerText = "Barleen… will you forgive me? 💗";
+  text.innerText = "Choose honestly 😭";
 
   buttons.innerHTML = `
-    <button onclick="yes()">Yes ❤️</button>
-    <button onclick="yes()">Of course 💞</button>
+    <button onclick="yes()">Yes 💖</button>
+    <button onclick="no()">No 😡</button>
   `;
 }
 
-/* ENDING */
+/* Yes Ending */
 function yes() {
   title.innerText = "😭💖 Come here my love…";
   text.innerText =
@@ -124,34 +104,51 @@ function yes() {
 
   buttons.innerHTML = "";
 
-  // Heart explosion
+  heartExplosion();
+}
+
+/* No */
+function no() {
+  title.innerText = "NO IS NOT AN OPTION 😭";
+  text.innerText =
+    "Barleen stop playing.\nYou know I love you too much.\nTry again 💀";
+
+  buttons.innerHTML = `<button onclick="forgive()">Okay okay 😭</button>`;
+}
+
+/* Floating Hearts Continuous */
+function createHeart() {
+  const heart = document.createElement("span");
+  heart.innerHTML = "💗";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = Math.random() * 3 + 4 + "s";
+  document.querySelector(".hearts").appendChild(heart);
+
+  setTimeout(() => heart.remove(), 6000);
+}
+setInterval(createHeart, 400);
+
+/* Heart Explosion */
+function heartExplosion() {
   for (let i = 0; i < 25; i++) {
     const heart = document.createElement("span");
-    heart.innerHTML = "💗";
+    heart.innerHTML = "💖";
     heart.style.left = Math.random() * 100 + "vw";
     heart.style.fontSize = "30px";
-    heart.style.animationDuration = "2s";
     document.querySelector(".hearts").appendChild(heart);
 
     setTimeout(() => heart.remove(), 2000);
   }
 }
 
-/* FLOATING HEARTS GENERATOR */
-function createHearts() {
-  const container = document.querySelector(".hearts");
+/* Music Button Fix */
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
 
-  setInterval(() => {
-    const heart = document.createElement("span");
-    heart.innerHTML = "💖";
+musicBtn.addEventListener("click", () => {
+  music.play();
+  musicBtn.style.display = "none";
+});
 
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = 5 + Math.random() * 5 + "s";
-
-    container.appendChild(heart);
-
-    setTimeout(() => heart.remove(), 9000);
-  }, 350);
-}
-
-createHearts();
+/* Start */
+renderPage();
